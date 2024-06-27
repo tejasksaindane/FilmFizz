@@ -1,5 +1,6 @@
+"use client";
+
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query";
-import { ApiResponse } from "./types";
 
 const movieApiHeaders = {
   "Content-Type": "application/json",
@@ -7,56 +8,57 @@ const movieApiHeaders = {
 
 const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
 const api_key = process.env.NEXT_PUBLIC_API_KEY;
-const createRequest = (url:any) => ({ url, headers: movieApiHeaders });
+
+const createRequest = (url) => ({ url, headers: movieApiHeaders });
 
 export const movieApi = createApi({
   //TODO: to know what is this reducer for
-  reducerPath: "cryptoApi",
+  reducerPath: "movieApi",
   baseQuery: fetchBaseQuery({
     baseUrl,
   }),
   endpoints: (builder) => ({
-    getTrending: builder.query<any, void>({
+    getTrending: builder.query({
       query: () =>
         createRequest(`trending/all/week?api_key=${api_key}&language=en-us`),
     }),
-    getNetflixOriginals: builder.query<any, void>({
+    getNetflixOriginals: builder.query({
       query: () =>
         createRequest(`discover/tv?api_key=${api_key}&with_networks=213`),
     }),
-    getTopRated: builder.query<any, void>({
+    getTopRated: builder.query({
       query: () =>
         createRequest(`movie/top_rated?api_key=${api_key}&language=en-us`),
     }),
-    getActionMovies: builder.query<any, void>({
+    getActionMovies: builder.query({
       query: () =>
         createRequest(`discover/movie?api_key=${api_key}&with_genres=28`),
     }),
-    getComedyMovies: builder.query<any, void>({
+    getComedyMovies: builder.query({
       query: () =>
         createRequest(`discover/movie?api_key=${api_key}&with_genres=35`),
     }),
-    getHorrorMovies: builder.query<any, void>({
+    getHorrorMovies: builder.query({
       query: () =>
         createRequest(`discover/movie?api_key=${api_key}&with_genres=27`),
     }),
-    getRomanceMovies: builder.query<any, void>({
+    getRomanceMovies: builder.query({
       query: () =>
         createRequest(`discover/movie?api_key=${api_key}&with_genres=10749`),
     }),
-    getSciFiMovies: builder.query<any, void>({
+    getSciFiMovies: builder.query({
       query: () =>
         createRequest(`discover/movie?api_key=${api_key}&with_genres=878`),
     }),
-    getCrimeMovies: builder.query<any, void>({
+    getCrimeMovies: builder.query({
       query: () =>
         createRequest(`discover/movie?api_key=${api_key}&with_genres=80`),
     }),
   }),
 });
 
-export const {
-  useGetTrendingQuery,         
+ const {
+  useGetTrendingQuery,
   useGetNetflixOriginalsQuery,
   useGetTopRatedQuery,
   useGetActionMoviesQuery,

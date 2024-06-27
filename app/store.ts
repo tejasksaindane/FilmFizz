@@ -1,7 +1,10 @@
+"use client"
+
 import { configureStore } from "@reduxjs/toolkit";
 import { movieApi } from "./Services/MovieApi"
 
-export default configureStore({
+
+export const store = configureStore({
   reducer: {
     [movieApi.reducerPath]: movieApi.reducer,
   },
@@ -14,3 +17,5 @@ export default configureStore({
       ),
 });
 
+// export type RootState = ReturnType<typeof store.getState>;
+// export type AppDispatch = typeof store.dispatch;
